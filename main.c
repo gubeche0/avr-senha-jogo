@@ -1,10 +1,14 @@
 #include <avr/io.h>
 #include <stdlib.h>
 #include <util/delay.h>
+#include <avr/interrupt.h>
 #include "hd44780.h"
 #include "print.h"
 #include "usart.h"
 #include "adc.h"
+#include <stdio.h>
+
+#define TIMER_CLK		F_CPU / 256
 
 #define LCD_RESP_PORT PORTD
 #define LCD_RESP_DDR DDRD
@@ -15,74 +19,86 @@
 #define RIGHT 6
 #define CENTER 5
 
-#define BUTTON_PIN PINC
-#define BUTTON_UP PC0
-#define BUTTON_DOWN PC2
-#define BUTTON_LEFT PC3
-#define BUTTON_RIGHT PC4
-#define BUTTON_CENTER PC1
+#define BUTTON PC2
 
 
-int16_t password = 1543;
-int8_t cursorSelecionado = 4;
-int changeCursor = 0;
+int16_t password = 1092;
+int8_t cursorSelecionado = 0;
+int changeDisplay = 0;
+int8_t pos;
+// int8_t tentativa[] = [0,0,0,0];
+int16_t tentativa = 0;
+int16_t tempoTentativaAtual = 30;
 
-ISR(PCINT1_vect)
-{
-	print("bbbb");
-    if (BUTTON_PIN & (1 << BUTTON_LEFT)) {       // lê PB1
-        // PORTB ^= (1 << PB5);       // toggle em PB0
-		changeCursor = 1;
-	    print("aaaaa");
-		LCD_RESP_PORT ^= 0xff;
-		if (cursorSelecionado == 0)  {
-			cursorSelecionado = 4;
-		} else {
-			cursorSelecionado += 1;
-		}
-        while (BUTTON_PIN & (1 << BUTTON_LEFT))
-            _delay_ms(1);          // debounce
-    }    
-    _delay_ms(1);                  // debounce
+ISR(TIMER1_OVF_vect){
+	tempoTentativaAtual--;
+	changeDisplay = 1;
+	// printint(tempoTentativaAtual);
+	TCNT1  = 65536 - TIMER_CLK;
 }
 
-float readJoystickX() {
+int8_t readJoystick() {
 	adc_set_channel(0);
 	float x = adc_read() * 0.0009765625;
 	adc_set_channel(1);	
 	float y = adc_read() * 0.0009765625;
 
-	print("\nx: ");
-    printfloat(x);
-    print("  y: ");
-    printfloat(y);
+	// print("\nx: ");
+    // printfloat(x);
+    // print("  y: ");
+    // printfloat(y);
 
-	return y;
+	if (x > 0.65) return RIGHT;
+	if (x < 0.35) return LEFT;
+	if (y > 0.65) return UP;
+	if (y < 0.35) return DOWN;
+
+	return CENTER;
+}
+
+void drawDisplay() {
+	hd44780_clear();
+	// hd44780_puts("Tempo: ");
+	hd44780_puts(("Tempo: "));
+	char time[2];
+	sprintf(time, "%d", tempoTentativaAtual); 
+	hd44780_puts(time);
+	hd44780_gotoxy(4,1);
+	char tent[5];
+	sprintf(tent, "%04d", tentativa); 
+	hd44780_puts(tent);
+	hd44780_gotoxy(cursorSelecionado + 4,1);
+
+	changeDisplay = 0;
 }
 
 int main() {
 	USART_Init();
   	adc_init();
-
-	DDRC &= ~((1 << BUTTON_CENTER) | (1 << BUTTON_DOWN) | (1 << BUTTON_UP) | (1 << BUTTON_LEFT) | (1 << BUTTON_RIGHT)); // PB0 entrada
-    PORTC |= (1 << BUTTON_CENTER) | (1 << BUTTON_DOWN) | (1 << BUTTON_UP) | (1 << BUTTON_LEFT) | (1 << BUTTON_RIGHT); // Ativar pull up
-
-    PORTC &= ~(1 << BUTTON_LEFT);          // desabilita pull-up de PB1
-
-
-	PCICR |= (1 << PCIE1);         // habilita vetor de interrupção para PCINT14 .. PCINTB8
-    PCMSK1 |= (1 << PCINT11);       // habilita interrupção para PC3
-
-
-    sei();
-
 	
-	hd44780_init();
-	hd44780_puts("Hello World!");
-	hd44780_gotoxy(4,1);
-	hd44780_puts("Working!");
-	hd44780_gotoxy(0,0);
+	cli();
 
+	// resseta contadores para TIMER1. OC2A e OC2B desconectados, modo normal
+	TCCR1A = 0;
+	TCCR1B = 0;
+	// frequência: 1 Hz (65536 - 16MHz / 256)
+	TCNT1  = 65536 - TIMER_CLK;
+	// seta bit para prescaler 256
+	TCCR1B |= (1 << CS12);
+	// habilita máscara do timer1 para overflows
+	TIMSK1 |= (1 << TOIE1);
+	
+	DDRD |= (1 << PD5);
+
+	// habilita interrupções
+	sei();
+
+	DDRC &= ~(1 << BUTTON); // PC2 entrada
+    // PORTC |= (1 << BUTTON_CENTER) | (1 << BUTTON_DOWN) | (1 << BUTTON_UP) | (1 << BUTTON_LEFT) | (1 << BUTTON_RIGHT); // Ativar pull up
+
+	hd44780_init();
+	drawDisplay();
+	
 	LCD_RESP_DDR = 0xff;
 
 	LCD_RESP_PORT = 0xff;
@@ -91,5 +107,45 @@ int main() {
 	printint(password);
 	print("\n");
 
-	
+	while(1){
+		if (changeDisplay) drawDisplay();
+
+		pos = readJoystick();
+		if (pos != CENTER) {
+			printint(pos);
+
+			while (readJoystick() != CENTER) {
+				pos = readJoystick();
+				_delay_ms(1);
+			}
+
+			switch (pos){
+				case RIGHT:
+					if (cursorSelecionado == 3) { 
+						cursorSelecionado = 0;
+					} else {
+						cursorSelecionado += 1;
+					}
+					changeDisplay = 1;
+					break;
+				case LEFT:
+					if (cursorSelecionado == 0) { 
+						cursorSelecionado = 3;
+					} else {
+						cursorSelecionado -= 1;
+					}
+					changeDisplay = 1;
+					break;
+				case UP:
+					// int p = 10 ^ (4-cursorSelecionado);
+					// n / 1000
+					// n / 100
+					// n / 10
+					// n % 10
+					break;
+				default:
+					break;
+			}
+		}
+	}
 }
