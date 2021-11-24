@@ -43,7 +43,7 @@ void hd44780_init() {
   hd44780_send(0x32, 0); // idem (precisa repetir 3x)
   hd44780_send(0x28, 0); // function set: 2 linhas, caract. 5x7
   hd44780_send(0x08, 0); // display off
-  hd44780_send(0x0F, 0); // display on, cursor on, blink on
+  hd44780_send(0x0E, 0); // display on, cursor on, blink off // 0x0F cursor blink, 0x0E cursor normal
   hd44780_send(0x01, 0); // clear display
 }
 

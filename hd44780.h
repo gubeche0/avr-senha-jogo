@@ -1,8 +1,8 @@
 #ifndef _HD44780_H
 #define _HD44780_H
 
-#define LCD_PORT PORTC
-#define LCD_DDR DDRC
+#define LCD_PORT PORTB
+#define LCD_DDR DDRB
 #define LCD_RS PC5
 #define LCD_EN PC4
 #define LCD_D4 PC3
