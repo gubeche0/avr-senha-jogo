@@ -23,7 +23,7 @@
 #define BUTTON PC2
 
 
-int16_t password = 1092;
+int16_t password;
 int8_t cursorSelecionado = 0;
 int changeDisplay = 0;
 int8_t pos;
@@ -88,8 +88,8 @@ void drawDisplay() {
 void verifica_senha() {
 	int totalCertas = 0;
 	int totalMeiaCertas = 0;
-	char tempSenha[4];
-	sprintf(tempSenha, "%d", password);
+	char tempSenha[5];
+	sprintf(tempSenha, "%04d", password);
 	for (int i=0; tentativa[i] != '\0'; i++) {
 		if (tentativa[i] == tempSenha[i]) {
 			totalCertas++;
@@ -134,6 +134,18 @@ int perdeu() {
 	}
 
 	return 0;
+}
+
+int ganhou() {
+	char tempSenha[5];
+	sprintf(tempSenha, "%04d", password);
+	print(tempSenha);
+	for (int i=0; tentativa[i] != '\0'; i++) {
+		if (tentativa[i] != tempSenha[i]) {
+			return 0;
+		}
+	}
+	return 1;
 }
 
 void gamerOver() {
@@ -196,6 +208,10 @@ int main() {
 				tentativas++;
 				changeDisplay = 1;
 				verifica_senha();
+				if (ganhou()) {
+					winGame();
+					startGame();
+				}
 
 				while (PINC & (1 << BUTTON)) { // Espera soltar o botão
 					_delay_ms(10);
@@ -203,57 +219,56 @@ int main() {
 
 				
 				resetTempo();
-			}
+			} else {
+				pos = readJoystick();
+				if (pos != CENTER) {
+					while (readJoystick() != CENTER) {
+						pos = readJoystick();
+						_delay_ms(1);
+					}
 
-			pos = readJoystick();
-			if (pos != CENTER) {
-				while (readJoystick() != CENTER) {
-					pos = readJoystick();
-					_delay_ms(1);
-				}
-
-				switch (pos){
-					case RIGHT:
-						if (cursorSelecionado == 3) { 
-							cursorSelecionado = 0;
-						} else {
-							cursorSelecionado += 1;
-						}
-						changeDisplay = 1;
-						break;
-					case LEFT:
-						if (cursorSelecionado == 0) { 
-							cursorSelecionado = 3;
-						} else {
-							cursorSelecionado -= 1;
-						}
-						changeDisplay = 1;
-						break;
-					case UP:
-						n = tentativa[cursorSelecionado] - '0';
-						if (n == 9) {
-							n = 0;
-						} else {
-							n++;
-						}
-						tentativa[cursorSelecionado] = n + '0';
-						changeDisplay = 1;
-						break;
-					case DOWN:
-						n = tentativa[cursorSelecionado] - '0';
-						if (n == 0) {
-							n = 9;
-						} else {
-							n--;
-						}
-						tentativa[cursorSelecionado] = n + '0';
-						changeDisplay = 1;
-						changeDisplay = 1;
-					default:
-						break;
+					switch (pos){
+						case RIGHT:
+							if (cursorSelecionado == 3) { 
+								cursorSelecionado = 0;
+							} else {
+								cursorSelecionado += 1;
+							}
+							changeDisplay = 1;
+							break;
+						case LEFT:
+							if (cursorSelecionado == 0) { 
+								cursorSelecionado = 3;
+							} else {
+								cursorSelecionado -= 1;
+							}
+							changeDisplay = 1;
+							break;
+						case UP:
+							n = tentativa[cursorSelecionado] - '0';
+							if (n == 9) {
+								n = 0;
+							} else {
+								n++;
+							}
+							tentativa[cursorSelecionado] = n + '0';
+							changeDisplay = 1;
+							break;
+						case DOWN:
+							n = tentativa[cursorSelecionado] - '0';
+							if (n == 0) {
+								n = 9;
+							} else {
+								n--;
+							}
+							tentativa[cursorSelecionado] = n + '0';
+							changeDisplay = 1;
+							changeDisplay = 1;
+						default:
+							break;
+					}
 				}
 			}
 		}
-		
 	}
 }
