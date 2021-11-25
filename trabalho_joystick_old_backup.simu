@@ -66,7 +66,7 @@ Circuit Id: atmega328-1
 
 Unique  Id: KY023-197: 
 Circuit Id: KY023-197
-<item hflip="1" objectName="KY023-197" vflip="1" labelx="-20" x="-372" valLabely="0" labely="-28" mainComp="false" valLabRot="0" valLabelx="0" boardPos="-1e+06,-1e+06" labelrot="0" id="KY023-197" Show_id="false" circRot="1.0565890622713305e+270" y="-116" circPos="0,0" itemtype="KY023" boardRot="-1e+06" rotation="0"/>
+<item hflip="1" objectName="KY023-197" vflip="1" labelx="-20" x="-372" valLabely="0" labely="-28" mainComp="false" valLabRot="0" valLabelx="0" boardPos="-1e+06,-1e+06" labelrot="0" id="KY023-197" Show_id="false" circRot="1.0565890622713305e+270" y="-72" circPos="0,0" itemtype="KY023" boardRot="-1e+06" rotation="0"/>
 
 Unique  Id: Connector-12: 
 Circuit Id: Connector-12
@@ -194,11 +194,11 @@ Circuit Id: Connector-138
 
 Unique  Id: Connector-198: 
 Circuit Id: Connector-198
-<item hflip="1" objectName="Connector-198" vflip="1" pointList="-460,-248,-452,-248,-452,-80,-384,-80" labelx="-16" x="-460" startpinid="atmega328-1-PC0" valLabely="0" endpinid="KY023-197-vrx" labely="-24" mainComp="false" enodeid="Circ_eNode-253" valLabRot="0" valLabelx="0" boardPos="-1e+06,-1e+06" labelrot="0" id="Connector-198" Show_id="false" circRot="5.2150168580288e-310" y="-248" circPos="0,0" itemtype="Connector" boardRot="-1e+06" rotation="0"/>
+<item hflip="1" objectName="Connector-198" vflip="1" pointList="-460,-248,-452,-248,-452,-36,-384,-36" labelx="-16" x="-460" startpinid="atmega328-1-PC0" valLabely="0" endpinid="KY023-197-vrx" labely="-24" mainComp="false" enodeid="Circ_eNode-253" valLabRot="0" valLabelx="0" boardPos="-1e+06,-1e+06" labelrot="0" id="Connector-198" Show_id="false" circRot="5.2150168580288e-310" y="-248" circPos="0,0" itemtype="Connector" boardRot="-1e+06" rotation="0"/>
 
 Unique  Id: Connector-199: 
 Circuit Id: Connector-199
-<item hflip="1" objectName="Connector-199" vflip="1" pointList="-460,-256,-444,-256,-444,-64,-376,-64,-376,-80" labelx="-16" x="-460" startpinid="atmega328-1-PC1" valLabely="0" endpinid="KY023-197-vry" labely="-24" mainComp="false" enodeid="Circ_eNode-254" valLabRot="0" valLabelx="0" boardPos="-1e+06,-1e+06" labelrot="0" id="Connector-199" Show_id="false" circRot="2.2399603907e-314" y="-256" circPos="0,0" itemtype="Connector" boardRot="-1e+06" rotation="0"/>
+<item hflip="1" objectName="Connector-199" vflip="1" pointList="-460,-256,-444,-256,-444,-36,-376,-36" labelx="-16" x="-460" startpinid="atmega328-1-PC1" valLabely="0" endpinid="KY023-197-vry" labely="-24" mainComp="false" enodeid="Circ_eNode-254" valLabRot="0" valLabelx="0" boardPos="-1e+06,-1e+06" labelrot="0" id="Connector-199" Show_id="false" circRot="2.2399603907e-314" y="-256" circPos="0,0" itemtype="Connector" boardRot="-1e+06" rotation="0"/>
 
 Unique  Id: Connector-226: 
 Circuit Id: Connector-226

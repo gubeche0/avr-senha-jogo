@@ -86,7 +86,32 @@ void drawDisplay() {
 }
 
 void verifica_senha() {
-	
+	int totalCertas = 0;
+	int totalMeiaCertas = 0;
+	char tempSenha[4];
+	sprintf(tempSenha, "%d", password);
+	for (int i=0; tentativa[i] != '\0'; i++) {
+		if (tentativa[i] == tempSenha[i]) {
+			totalCertas++;
+		}
+
+		
+	}
+
+	for (int x=0; tempSenha[x] != '\0'; x++) {
+		for (int i=0; tentativa[i] != '\0'; i++) {
+			if (tentativa[i] == tempSenha[x]) {
+				totalMeiaCertas++;
+				break;
+			}
+		}
+	}
+	printint(totalCertas);
+	print(" ");
+	printint(totalMeiaCertas - totalCertas);
+	print("\n");
+
+	LCD_RESP_PORT = (0xf >> (4 - totalCertas)) | ((0xf  << (totalMeiaCertas - totalCertas)) & 0xf0);
 }
 
 void startGame() {
