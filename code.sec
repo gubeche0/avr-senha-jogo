@@ -1,0 +1,31 @@
+
+code.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         0000003a  00800100  000012ac  00001340  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         000012ac  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000008  0080013a  0080013a  0000137a  2**0
+                  ALLOC
+  3 .comment      00000026  00000000  00000000  0000137a  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000013a0  2**2
+                  CONTENTS, READONLY, OCTETS
+  5 .debug_aranges 000001a8  00000000  00000000  000013e0  2**3
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+  6 .debug_info   0000178f  00000000  00000000  00001588  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+  7 .debug_abbrev 00000dec  00000000  00000000  00002d17  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+  8 .debug_line   00001afd  00000000  00000000  00003b03  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+  9 .debug_frame  000002d0  00000000  00000000  00005600  2**2
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 10 .debug_str    000005e8  00000000  00000000  000058d0  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 11 .debug_loc    000009d5  00000000  00000000  00005eb8  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 12 .debug_ranges 00000048  00000000  00000000  0000688d  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS

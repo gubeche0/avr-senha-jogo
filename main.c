@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
+// #include <math.h>
 #include "hd44780.h"
 #include "print.h"
 #include "usart.h"
@@ -27,8 +28,11 @@ int8_t cursorSelecionado = 0;
 int changeDisplay = 0;
 int8_t pos;
 // int8_t tentativa[] = [0,0,0,0];
-int16_t tentativa = 0;
+// int16_t tentativa = 0;
+char *tentativa = "0000";
 int16_t tempoTentativaAtual = 30;
+int tentativas;
+int n;
 
 ISR(TIMER1_OVF_vect){
 	tempoTentativaAtual--;
@@ -64,12 +68,17 @@ void drawDisplay() {
 	sprintf(time, "%d", tempoTentativaAtual); 
 	hd44780_puts(time);
 	hd44780_gotoxy(4,1);
-	char tent[5];
-	sprintf(tent, "%04d", tentativa); 
-	hd44780_puts(tent);
+	// char tent[5];
+	// sprintf(tent, "%04d", tentativa); 
+	// hd44780_puts(tent);
+	hd44780_puts(tentativa);
 	hd44780_gotoxy(cursorSelecionado + 4,1);
 
 	changeDisplay = 0;
+}
+
+void perdeu() {
+
 }
 
 int main() {
@@ -107,13 +116,21 @@ int main() {
 	printint(password);
 	print("\n");
 
+	tentativas = 0;
+
 	while(1){
 		if (changeDisplay) drawDisplay();
 
+		if (PINC & (1 << BUTTON)) { // Le BUTTON
+			print("Verifica se acertou");
+
+            while (PINC & (1 << BUTTON)) { // Espera soltar o botão
+                _delay_ms(10);
+            }
+        }
+
 		pos = readJoystick();
 		if (pos != CENTER) {
-			printint(pos);
-
 			while (readJoystick() != CENTER) {
 				pos = readJoystick();
 				_delay_ms(1);
@@ -137,12 +154,25 @@ int main() {
 					changeDisplay = 1;
 					break;
 				case UP:
-					// int p = 10 ^ (4-cursorSelecionado);
-					// n / 1000
-					// n / 100
-					// n / 10
-					// n % 10
+					n = tentativa[cursorSelecionado] - '0';
+					if (n == 9) {
+						n = 0;
+					} else {
+						n++;
+					}
+					tentativa[cursorSelecionado] = n + '0';
+					changeDisplay = 1;
 					break;
+				case DOWN:
+					n = tentativa[cursorSelecionado] - '0';
+					if (n == 0) {
+						n = 9;
+					} else {
+						n--;
+					}
+					tentativa[cursorSelecionado] = n + '0';
+					changeDisplay = 1;
+					changeDisplay = 1;
 				default:
 					break;
 			}
