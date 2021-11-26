@@ -8,6 +8,7 @@
 #include "usart.h"
 #include "adc.h"
 #include <stdio.h>
+#include <avr/eeprom.h>
 
 #define TIMER_CLK		F_CPU / 256
 
@@ -114,11 +115,26 @@ void verifica_senha() {
 	LCD_RESP_PORT = (0xf >> (4 - totalCertas)) | ((0xf  << (totalMeiaCertas - totalCertas)) & 0xf0);
 }
 
+int16_t getRandomNumber() {
+	// Solução pega em https://www.avrfreaks.net/forum/how-do-you-seed-srand
+	// Lendo um seed aleatorio do eeprom e gravando um novo
+	uint32_t state;
+    static uint32_t EEMEM sstate;
+
+    state = eeprom_read_dword(&sstate);
+
+    if (state == 0xffffffUL)
+            state = 0xDEADBEEFUL;
+    srandom(state);
+    eeprom_write_dword(&sstate, random());
+	return random() % 10000;
+}
+
 void startGame() {
-	password = 1092;
+	password = getRandomNumber();
 	tentativas = 0;
 	cursorSelecionado = 0;
-	tentativa = "0000";
+	tentativa = "1111";
 	LCD_RESP_PORT = 0x00;
 
 	print("password: ");
@@ -139,7 +155,7 @@ int perdeu() {
 int ganhou() {
 	char tempSenha[5];
 	sprintf(tempSenha, "%04d", password);
-	print(tempSenha);
+	// print(tempSenha);
 	for (int i=0; tentativa[i] != '\0'; i++) {
 		if (tentativa[i] != tempSenha[i]) {
 			return 0;
