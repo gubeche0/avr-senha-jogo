@@ -51,10 +51,10 @@ int8_t readJoystick() {
     // print("  y: ");
     // printfloat(y);
 
-	if (x > 0.65) return RIGHT;
-	if (x < 0.35) return LEFT;
-	if (y > 0.65) return UP;
-	if (y < 0.35) return DOWN;
+	if (x > 0.6) return RIGHT;
+	if (x < 0.4) return LEFT;
+	if (y > 0.5) return UP;
+	if (y < 0.4) return DOWN;
 
 	return CENTER;
 }
@@ -134,7 +134,7 @@ void startGame() {
 	password = getRandomNumber();
 	tentativas = 0;
 	cursorSelecionado = 0;
-	tentativa = "1111";
+	tentativa = "0000";
 	LCD_RESP_PORT = 0x00;
 
 	print("password: ");

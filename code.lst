@@ -49,13 +49,13 @@ Disassembly of section .text:
       7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
       80:	05 90       	lpm	r0, Z+
       82:	0d 92       	st	X+, r0
-      84:	aa 34       	cpi	r26, 0x4A	; 74
+      84:	a4 34       	cpi	r26, 0x44	; 68
       86:	b1 07       	cpc	r27, r17
       88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
 
 0000008a <__do_clear_bss>:
       8a:	21 e0       	ldi	r18, 0x01	; 1
-      8c:	aa e4       	ldi	r26, 0x4A	; 74
+      8c:	a4 e4       	ldi	r26, 0x44	; 68
       8e:	b1 e0       	ldi	r27, 0x01	; 1
       90:	01 c0       	rjmp	.+2      	; 0x94 <.do_clear_bss_start>
 
@@ -63,7 +63,7 @@ Disassembly of section .text:
       92:	1d 92       	st	X+, r1
 
 00000094 <.do_clear_bss_start>:
-      94:	a6 35       	cpi	r26, 0x56	; 86
+      94:	a0 35       	cpi	r26, 0x50	; 80
       96:	b2 07       	cpc	r27, r18
       98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
       9a:	0e 94 5c 05 	call	0xab8	; 0xab8 <main>
@@ -77,15 +77,15 @@ Disassembly of section .text:
       a8:	8f b7       	in	r24, 0x3f	; 63
       aa:	8f 93       	push	r24
       ac:	9f 93       	push	r25
-      ae:	80 91 54 01 	lds	r24, 0x0154	; 0x800154 <tempoTentativaAtual>
-      b2:	90 91 55 01 	lds	r25, 0x0155	; 0x800155 <tempoTentativaAtual+0x1>
+      ae:	80 91 4e 01 	lds	r24, 0x014E	; 0x80014e <tempoTentativaAtual>
+      b2:	90 91 4f 01 	lds	r25, 0x014F	; 0x80014f <tempoTentativaAtual+0x1>
       b6:	01 97       	sbiw	r24, 0x01	; 1
-      b8:	90 93 55 01 	sts	0x0155, r25	; 0x800155 <tempoTentativaAtual+0x1>
-      bc:	80 93 54 01 	sts	0x0154, r24	; 0x800154 <tempoTentativaAtual>
+      b8:	90 93 4f 01 	sts	0x014F, r25	; 0x80014f <tempoTentativaAtual+0x1>
+      bc:	80 93 4e 01 	sts	0x014E, r24	; 0x80014e <tempoTentativaAtual>
       c0:	81 e0       	ldi	r24, 0x01	; 1
       c2:	90 e0       	ldi	r25, 0x00	; 0
-      c4:	90 93 4d 01 	sts	0x014D, r25	; 0x80014d <changeDisplay+0x1>
-      c8:	80 93 4c 01 	sts	0x014C, r24	; 0x80014c <changeDisplay>
+      c4:	90 93 47 01 	sts	0x0147, r25	; 0x800147 <changeDisplay+0x1>
+      c8:	80 93 46 01 	sts	0x0146, r24	; 0x800146 <changeDisplay>
       cc:	8c ed       	ldi	r24, 0xDC	; 220
       ce:	9b e0       	ldi	r25, 0x0B	; 11
       d0:	90 93 85 00 	sts	0x0085, r25	; 0x800085 <__TEXT_REGION_LENGTH__+0x7e0085>
@@ -135,9 +135,9 @@ Disassembly of section .text:
      132:	0e 94 49 05 	call	0xa92	; 0xa92 <adc_read>
      136:	9e 83       	std	Y+6, r25	; 0x06
      138:	8d 83       	std	Y+5, r24	; 0x05
-     13a:	26 e6       	ldi	r18, 0x66	; 102
-     13c:	36 e6       	ldi	r19, 0x66	; 102
-     13e:	46 e2       	ldi	r20, 0x26	; 38
+     13a:	2a e9       	ldi	r18, 0x9A	; 154
+     13c:	39 e9       	ldi	r19, 0x99	; 153
+     13e:	49 e1       	ldi	r20, 0x19	; 25
      140:	5f e3       	ldi	r21, 0x3F	; 63
      142:	69 81       	ldd	r22, Y+1	; 0x01
      144:	7a 81       	ldd	r23, Y+2	; 0x02
@@ -147,9 +147,9 @@ Disassembly of section .text:
      14e:	18 16       	cp	r1, r24
      150:	0c f4       	brge	.+2      	; 0x154 <readJoystick+0x72>
      152:	45 c0       	rjmp	.+138    	; 0x1de <readJoystick+0xfc>
-     154:	23 e3       	ldi	r18, 0x33	; 51
-     156:	33 e3       	ldi	r19, 0x33	; 51
-     158:	43 eb       	ldi	r20, 0xB3	; 179
+     154:	2d ec       	ldi	r18, 0xCD	; 205
+     156:	3c ec       	ldi	r19, 0xCC	; 204
+     158:	4c ec       	ldi	r20, 0xCC	; 204
      15a:	5e e3       	ldi	r21, 0x3E	; 62
      15c:	69 81       	ldd	r22, Y+1	; 0x01
      15e:	7a 81       	ldd	r23, Y+2	; 0x02
@@ -183,16 +183,16 @@ Disassembly of section .text:
      19c:	7a 83       	std	Y+2, r23	; 0x02
      19e:	8b 83       	std	Y+3, r24	; 0x03
      1a0:	9c 83       	std	Y+4, r25	; 0x04
-     1a2:	26 e6       	ldi	r18, 0x66	; 102
-     1a4:	36 e6       	ldi	r19, 0x66	; 102
-     1a6:	46 e2       	ldi	r20, 0x26	; 38
+     1a2:	20 e0       	ldi	r18, 0x00	; 0
+     1a4:	30 e0       	ldi	r19, 0x00	; 0
+     1a6:	40 e0       	ldi	r20, 0x00	; 0
      1a8:	5f e3       	ldi	r21, 0x3F	; 63
      1aa:	0e 94 c7 07 	call	0xf8e	; 0xf8e <__gesf2>
      1ae:	18 16       	cp	r1, r24
      1b0:	d4 f0       	brlt	.+52     	; 0x1e6 <readJoystick+0x104>
-     1b2:	23 e3       	ldi	r18, 0x33	; 51
-     1b4:	33 e3       	ldi	r19, 0x33	; 51
-     1b6:	43 eb       	ldi	r20, 0xB3	; 179
+     1b2:	2d ec       	ldi	r18, 0xCD	; 205
+     1b4:	3c ec       	ldi	r19, 0xCC	; 204
+     1b6:	4c ec       	ldi	r20, 0xCC	; 204
      1b8:	5e e3       	ldi	r21, 0x3E	; 62
      1ba:	69 81       	ldd	r22, Y+1	; 0x01
      1bc:	7a 81       	ldd	r23, Y+2	; 0x02
@@ -223,8 +223,8 @@ Disassembly of section .text:
 000001ee <resetTempo>:
      1ee:	8e e1       	ldi	r24, 0x1E	; 30
      1f0:	90 e0       	ldi	r25, 0x00	; 0
-     1f2:	90 93 55 01 	sts	0x0155, r25	; 0x800155 <tempoTentativaAtual+0x1>
-     1f6:	80 93 54 01 	sts	0x0154, r24	; 0x800154 <tempoTentativaAtual>
+     1f2:	90 93 4f 01 	sts	0x014F, r25	; 0x80014f <tempoTentativaAtual+0x1>
+     1f6:	80 93 4e 01 	sts	0x014E, r24	; 0x80014e <tempoTentativaAtual>
      1fa:	08 95       	ret
 
 000001fc <drawDisplay>:
@@ -242,9 +242,9 @@ Disassembly of section .text:
      214:	86 e0       	ldi	r24, 0x06	; 6
      216:	91 e0       	ldi	r25, 0x01	; 1
      218:	0e 94 6f 03 	call	0x6de	; 0x6de <hd44780_puts>
-     21c:	80 91 55 01 	lds	r24, 0x0155	; 0x800155 <tempoTentativaAtual+0x1>
+     21c:	80 91 4f 01 	lds	r24, 0x014F	; 0x80014f <tempoTentativaAtual+0x1>
      220:	8f 93       	push	r24
-     222:	80 91 54 01 	lds	r24, 0x0154	; 0x800154 <tempoTentativaAtual>
+     222:	80 91 4e 01 	lds	r24, 0x014E	; 0x80014e <tempoTentativaAtual>
      226:	8f 93       	push	r24
      228:	0e e0       	ldi	r16, 0x0E	; 14
      22a:	11 e0       	ldi	r17, 0x01	; 1
@@ -262,9 +262,9 @@ Disassembly of section .text:
      246:	60 e0       	ldi	r22, 0x00	; 0
      248:	8e e0       	ldi	r24, 0x0E	; 14
      24a:	0e 94 7c 03 	call	0x6f8	; 0x6f8 <hd44780_gotoxy>
-     24e:	80 91 4b 01 	lds	r24, 0x014B	; 0x80014b <tentativas+0x1>
+     24e:	80 91 45 01 	lds	r24, 0x0145	; 0x800145 <tentativas+0x1>
      252:	8f 93       	push	r24
-     254:	80 91 4a 01 	lds	r24, 0x014A	; 0x80014a <tentativas>
+     254:	80 91 44 01 	lds	r24, 0x0144	; 0x800144 <tentativas>
      258:	8f 93       	push	r24
      25a:	1f 93       	push	r17
      25c:	0f 93       	push	r16
@@ -282,12 +282,12 @@ Disassembly of section .text:
      27a:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <tentativa>
      27e:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <tentativa+0x1>
      282:	0e 94 6f 03 	call	0x6de	; 0x6de <hd44780_puts>
-     286:	80 91 4e 01 	lds	r24, 0x014E	; 0x80014e <cursorSelecionado>
+     286:	80 91 48 01 	lds	r24, 0x0148	; 0x800148 <cursorSelecionado>
      28a:	61 e0       	ldi	r22, 0x01	; 1
      28c:	8c 5f       	subi	r24, 0xFC	; 252
      28e:	0e 94 7c 03 	call	0x6f8	; 0x6f8 <hd44780_gotoxy>
-     292:	10 92 4d 01 	sts	0x014D, r1	; 0x80014d <changeDisplay+0x1>
-     296:	10 92 4c 01 	sts	0x014C, r1	; 0x80014c <changeDisplay>
+     292:	10 92 47 01 	sts	0x0147, r1	; 0x800147 <changeDisplay+0x1>
+     296:	10 92 46 01 	sts	0x0146, r1	; 0x800146 <changeDisplay>
      29a:	0f b6       	in	r0, 0x3f	; 63
      29c:	f8 94       	cli
      29e:	de bf       	out	0x3e, r29	; 62
@@ -320,9 +320,9 @@ Disassembly of section .text:
      2d0:	de bf       	out	0x3e, r29	; 62
      2d2:	0f be       	out	0x3f, r0	; 63
      2d4:	cd bf       	out	0x3d, r28	; 61
-     2d6:	80 91 50 01 	lds	r24, 0x0150	; 0x800150 <password+0x1>
+     2d6:	80 91 4a 01 	lds	r24, 0x014A	; 0x80014a <password+0x1>
      2da:	8f 93       	push	r24
-     2dc:	80 91 4f 01 	lds	r24, 0x014F	; 0x80014f <password>
+     2dc:	80 91 49 01 	lds	r24, 0x0149	; 0x800149 <password>
      2e0:	8f 93       	push	r24
      2e2:	81 e1       	ldi	r24, 0x11	; 17
      2e4:	91 e0       	ldi	r25, 0x01	; 1
@@ -504,11 +504,11 @@ Disassembly of section .text:
      456:	cd b7       	in	r28, 0x3d	; 61
      458:	de b7       	in	r29, 0x3e	; 62
      45a:	0e 94 e7 01 	call	0x3ce	; 0x3ce <getRandomNumber>
-     45e:	90 93 50 01 	sts	0x0150, r25	; 0x800150 <password+0x1>
-     462:	80 93 4f 01 	sts	0x014F, r24	; 0x80014f <password>
-     466:	10 92 4b 01 	sts	0x014B, r1	; 0x80014b <tentativas+0x1>
-     46a:	10 92 4a 01 	sts	0x014A, r1	; 0x80014a <tentativas>
-     46e:	10 92 4e 01 	sts	0x014E, r1	; 0x80014e <cursorSelecionado>
+     45e:	90 93 4a 01 	sts	0x014A, r25	; 0x80014a <password+0x1>
+     462:	80 93 49 01 	sts	0x0149, r24	; 0x800149 <password>
+     466:	10 92 45 01 	sts	0x0145, r1	; 0x800145 <tentativas+0x1>
+     46a:	10 92 44 01 	sts	0x0144, r1	; 0x800144 <tentativas>
+     46e:	10 92 48 01 	sts	0x0148, r1	; 0x800148 <cursorSelecionado>
      472:	88 e1       	ldi	r24, 0x18	; 24
      474:	91 e0       	ldi	r25, 0x01	; 1
      476:	90 93 01 01 	sts	0x0101, r25	; 0x800101 <tentativa+0x1>
@@ -517,8 +517,8 @@ Disassembly of section .text:
      480:	8d e1       	ldi	r24, 0x1D	; 29
      482:	91 e0       	ldi	r25, 0x01	; 1
      484:	0e 94 94 04 	call	0x928	; 0x928 <print>
-     488:	80 91 4f 01 	lds	r24, 0x014F	; 0x80014f <password>
-     48c:	90 91 50 01 	lds	r25, 0x0150	; 0x800150 <password+0x1>
+     488:	80 91 49 01 	lds	r24, 0x0149	; 0x800149 <password>
+     48c:	90 91 4a 01 	lds	r25, 0x014A	; 0x80014a <password+0x1>
      490:	9c 01       	movw	r18, r24
      492:	99 0f       	add	r25, r25
      494:	44 0b       	sbc	r20, r20
@@ -531,8 +531,8 @@ Disassembly of section .text:
      4a4:	0e 94 94 04 	call	0x928	; 0x928 <print>
      4a8:	8e e1       	ldi	r24, 0x1E	; 30
      4aa:	90 e0       	ldi	r25, 0x00	; 0
-     4ac:	90 93 55 01 	sts	0x0155, r25	; 0x800155 <tempoTentativaAtual+0x1>
-     4b0:	80 93 54 01 	sts	0x0154, r24	; 0x800154 <tempoTentativaAtual>
+     4ac:	90 93 4f 01 	sts	0x014F, r25	; 0x80014f <tempoTentativaAtual+0x1>
+     4b0:	80 93 4e 01 	sts	0x014E, r24	; 0x80014e <tempoTentativaAtual>
      4b4:	0f 90       	pop	r0
      4b6:	0f 90       	pop	r0
      4b8:	0f 90       	pop	r0
@@ -542,15 +542,15 @@ Disassembly of section .text:
      4c0:	08 95       	ret
 
 000004c2 <perdeu>:
-     4c2:	80 91 54 01 	lds	r24, 0x0154	; 0x800154 <tempoTentativaAtual>
-     4c6:	90 91 55 01 	lds	r25, 0x0155	; 0x800155 <tempoTentativaAtual+0x1>
+     4c2:	80 91 4e 01 	lds	r24, 0x014E	; 0x80014e <tempoTentativaAtual>
+     4c6:	90 91 4f 01 	lds	r25, 0x014F	; 0x80014f <tempoTentativaAtual+0x1>
      4ca:	18 16       	cp	r1, r24
      4cc:	19 06       	cpc	r1, r25
      4ce:	64 f4       	brge	.+24     	; 0x4e8 <perdeu+0x26>
      4d0:	81 e0       	ldi	r24, 0x01	; 1
      4d2:	90 e0       	ldi	r25, 0x00	; 0
-     4d4:	20 91 4a 01 	lds	r18, 0x014A	; 0x80014a <tentativas>
-     4d8:	30 91 4b 01 	lds	r19, 0x014B	; 0x80014b <tentativas+0x1>
+     4d4:	20 91 44 01 	lds	r18, 0x0144	; 0x800144 <tentativas>
+     4d8:	30 91 45 01 	lds	r19, 0x0145	; 0x800145 <tentativas+0x1>
      4dc:	2b 30       	cpi	r18, 0x0B	; 11
      4de:	31 05       	cpc	r19, r1
      4e0:	2c f4       	brge	.+10     	; 0x4ec <perdeu+0x2a>
@@ -571,9 +571,9 @@ Disassembly of section .text:
      4fa:	0f 92       	push	r0
      4fc:	cd b7       	in	r28, 0x3d	; 61
      4fe:	de b7       	in	r29, 0x3e	; 62
-     500:	80 91 50 01 	lds	r24, 0x0150	; 0x800150 <password+0x1>
+     500:	80 91 4a 01 	lds	r24, 0x014A	; 0x80014a <password+0x1>
      504:	8f 93       	push	r24
-     506:	80 91 4f 01 	lds	r24, 0x014F	; 0x80014f <password>
+     506:	80 91 49 01 	lds	r24, 0x0149	; 0x800149 <password>
      50a:	8f 93       	push	r24
      50c:	81 e1       	ldi	r24, 0x11	; 17
      50e:	91 e0       	ldi	r25, 0x01	; 1
@@ -1133,7 +1133,7 @@ Disassembly of section .text:
      964:	8f 83       	std	Y+7, r24	; 0x07
      966:	98 87       	std	Y+8, r25	; 0x08
      968:	0e 94 84 03 	call	0x708	; 0x708 <printint>
-     96c:	87 e4       	ldi	r24, 0x47	; 71
+     96c:	82 e4       	ldi	r24, 0x42	; 66
      96e:	91 e0       	ldi	r25, 0x01	; 1
      970:	0e 94 94 04 	call	0x928	; 0x928 <print>
      974:	6d 81       	ldd	r22, Y+5	; 0x05
@@ -1177,7 +1177,7 @@ Disassembly of section .text:
      9c8:	a1 05       	cpc	r26, r1
      9ca:	b1 05       	cpc	r27, r1
      9cc:	80 f4       	brcc	.+32     	; 0x9ee <printfloat+0xae>
-     9ce:	85 e4       	ldi	r24, 0x45	; 69
+     9ce:	8b e1       	ldi	r24, 0x1B	; 27
      9d0:	91 e0       	ldi	r25, 0x01	; 1
      9d2:	0e 94 94 04 	call	0x928	; 0x928 <print>
      9d6:	89 81       	ldd	r24, Y+1	; 0x01
@@ -1188,7 +1188,7 @@ Disassembly of section .text:
      9e0:	a1 05       	cpc	r26, r1
      9e2:	b1 05       	cpc	r27, r1
      9e4:	20 f4       	brcc	.+8      	; 0x9ee <printfloat+0xae>
-     9e6:	85 e4       	ldi	r24, 0x45	; 69
+     9e6:	8b e1       	ldi	r24, 0x1B	; 27
      9e8:	91 e0       	ldi	r25, 0x01	; 1
      9ea:	0e 94 94 04 	call	0x928	; 0x928 <print>
      9ee:	69 81       	ldd	r22, Y+1	; 0x01
@@ -1328,20 +1328,20 @@ Disassembly of section .text:
      b1a:	0e 94 b1 02 	call	0x562	; 0x562 <gamerOver>
      b1e:	0e 94 27 02 	call	0x44e	; 0x44e <startGame>
      b22:	f7 cf       	rjmp	.-18     	; 0xb12 <main+0x5a>
-     b24:	80 91 4c 01 	lds	r24, 0x014C	; 0x80014c <changeDisplay>
-     b28:	90 91 4d 01 	lds	r25, 0x014D	; 0x80014d <changeDisplay+0x1>
+     b24:	80 91 46 01 	lds	r24, 0x0146	; 0x800146 <changeDisplay>
+     b28:	90 91 47 01 	lds	r25, 0x0147	; 0x800147 <changeDisplay+0x1>
      b2c:	89 2b       	or	r24, r25
      b2e:	11 f0       	breq	.+4      	; 0xb34 <main+0x7c>
      b30:	0e 94 fe 00 	call	0x1fc	; 0x1fc <drawDisplay>
      b34:	32 9b       	sbis	0x06, 2	; 6
      b36:	25 c0       	rjmp	.+74     	; 0xb82 <main+0xca>
-     b38:	80 91 4a 01 	lds	r24, 0x014A	; 0x80014a <tentativas>
-     b3c:	90 91 4b 01 	lds	r25, 0x014B	; 0x80014b <tentativas+0x1>
+     b38:	80 91 44 01 	lds	r24, 0x0144	; 0x800144 <tentativas>
+     b3c:	90 91 45 01 	lds	r25, 0x0145	; 0x800145 <tentativas+0x1>
      b40:	01 96       	adiw	r24, 0x01	; 1
-     b42:	90 93 4b 01 	sts	0x014B, r25	; 0x80014b <tentativas+0x1>
-     b46:	80 93 4a 01 	sts	0x014A, r24	; 0x80014a <tentativas>
-     b4a:	d0 93 4d 01 	sts	0x014D, r29	; 0x80014d <changeDisplay+0x1>
-     b4e:	c0 93 4c 01 	sts	0x014C, r28	; 0x80014c <changeDisplay>
+     b42:	90 93 45 01 	sts	0x0145, r25	; 0x800145 <tentativas+0x1>
+     b46:	80 93 44 01 	sts	0x0144, r24	; 0x800144 <tentativas>
+     b4a:	d0 93 47 01 	sts	0x0147, r29	; 0x800147 <changeDisplay+0x1>
+     b4e:	c0 93 46 01 	sts	0x0146, r28	; 0x800146 <changeDisplay>
      b52:	0e 94 5d 01 	call	0x2ba	; 0x2ba <verifica_senha>
      b56:	0e 94 77 02 	call	0x4ee	; 0x4ee <ganhou>
      b5a:	89 2b       	or	r24, r25
@@ -1350,8 +1350,8 @@ Disassembly of section .text:
      b62:	0e 94 27 02 	call	0x44e	; 0x44e <startGame>
      b66:	32 99       	sbic	0x06, 2	; 6
      b68:	05 c0       	rjmp	.+10     	; 0xb74 <main+0xbc>
-     b6a:	f0 92 55 01 	sts	0x0155, r15	; 0x800155 <tempoTentativaAtual+0x1>
-     b6e:	e0 92 54 01 	sts	0x0154, r14	; 0x800154 <tempoTentativaAtual>
+     b6a:	f0 92 4f 01 	sts	0x014F, r15	; 0x80014f <tempoTentativaAtual+0x1>
+     b6e:	e0 92 4e 01 	sts	0x014E, r14	; 0x80014e <tempoTentativaAtual>
      b72:	cf cf       	rjmp	.-98     	; 0xb12 <main+0x5a>
      b74:	8f e3       	ldi	r24, 0x3F	; 63
      b76:	9c e9       	ldi	r25, 0x9C	; 156
@@ -1361,13 +1361,13 @@ Disassembly of section .text:
      b7e:	00 00       	nop
      b80:	f2 cf       	rjmp	.-28     	; 0xb66 <main+0xae>
      b82:	0e 94 71 00 	call	0xe2	; 0xe2 <readJoystick>
-     b86:	80 93 53 01 	sts	0x0153, r24	; 0x800153 <pos>
+     b86:	80 93 4d 01 	sts	0x014D, r24	; 0x80014d <pos>
      b8a:	85 30       	cpi	r24, 0x05	; 5
      b8c:	11 f2       	breq	.-124    	; 0xb12 <main+0x5a>
      b8e:	0e 94 71 00 	call	0xe2	; 0xe2 <readJoystick>
      b92:	85 30       	cpi	r24, 0x05	; 5
      b94:	91 f4       	brne	.+36     	; 0xbba <main+0x102>
-     b96:	80 91 53 01 	lds	r24, 0x0153	; 0x800153 <pos>
+     b96:	80 91 4d 01 	lds	r24, 0x014D	; 0x80014d <pos>
      b9a:	86 30       	cpi	r24, 0x06	; 6
      b9c:	b9 f1       	breq	.+110    	; 0xc0c <main+0x154>
      b9e:	c4 f4       	brge	.+48     	; 0xbd0 <main+0x118>
@@ -1377,13 +1377,13 @@ Disassembly of section .text:
      ba6:	84 30       	cpi	r24, 0x04	; 4
      ba8:	09 f0       	breq	.+2      	; 0xbac <main+0xf4>
      baa:	b3 cf       	rjmp	.-154    	; 0xb12 <main+0x5a>
-     bac:	80 91 4e 01 	lds	r24, 0x014E	; 0x80014e <cursorSelecionado>
+     bac:	80 91 48 01 	lds	r24, 0x0148	; 0x800148 <cursorSelecionado>
      bb0:	81 11       	cpse	r24, r1
      bb2:	3b c0       	rjmp	.+118    	; 0xc2a <main+0x172>
-     bb4:	d0 92 4e 01 	sts	0x014E, r13	; 0x80014e <cursorSelecionado>
+     bb4:	d0 92 48 01 	sts	0x0148, r13	; 0x800148 <cursorSelecionado>
      bb8:	2f c0       	rjmp	.+94     	; 0xc18 <main+0x160>
      bba:	0e 94 71 00 	call	0xe2	; 0xe2 <readJoystick>
-     bbe:	80 93 53 01 	sts	0x0153, r24	; 0x800153 <pos>
+     bbe:	80 93 4d 01 	sts	0x014D, r24	; 0x80014d <pos>
      bc2:	8f e9       	ldi	r24, 0x9F	; 159
      bc4:	9f e0       	ldi	r25, 0x0F	; 15
      bc6:	01 97       	sbiw	r24, 0x01	; 1
@@ -1394,7 +1394,7 @@ Disassembly of section .text:
      bd0:	88 30       	cpi	r24, 0x08	; 8
      bd2:	09 f0       	breq	.+2      	; 0xbd6 <main+0x11e>
      bd4:	9e cf       	rjmp	.-196    	; 0xb12 <main+0x5a>
-     bd6:	80 91 4e 01 	lds	r24, 0x014E	; 0x80014e <cursorSelecionado>
+     bd6:	80 91 48 01 	lds	r24, 0x0148	; 0x800148 <cursorSelecionado>
      bda:	e0 91 00 01 	lds	r30, 0x0100	; 0x800100 <tentativa>
      bde:	f0 91 01 01 	lds	r31, 0x0101	; 0x800101 <tentativa+0x1>
      be2:	e8 0f       	add	r30, r24
@@ -1409,25 +1409,25 @@ Disassembly of section .text:
      bf4:	8f 97       	sbiw	r24, 0x2f	; 47
      bf6:	29 33       	cpi	r18, 0x39	; 57
      bf8:	89 f5       	brne	.+98     	; 0xc5c <main+0x1a4>
-     bfa:	10 92 52 01 	sts	0x0152, r1	; 0x800152 <n+0x1>
-     bfe:	10 92 51 01 	sts	0x0151, r1	; 0x800151 <n>
-     c02:	80 91 51 01 	lds	r24, 0x0151	; 0x800151 <n>
+     bfa:	10 92 4c 01 	sts	0x014C, r1	; 0x80014c <n+0x1>
+     bfe:	10 92 4b 01 	sts	0x014B, r1	; 0x80014b <n>
+     c02:	80 91 4b 01 	lds	r24, 0x014B	; 0x80014b <n>
      c06:	80 5d       	subi	r24, 0xD0	; 208
      c08:	80 83       	st	Z, r24
      c0a:	06 c0       	rjmp	.+12     	; 0xc18 <main+0x160>
-     c0c:	80 91 4e 01 	lds	r24, 0x014E	; 0x80014e <cursorSelecionado>
+     c0c:	80 91 48 01 	lds	r24, 0x0148	; 0x800148 <cursorSelecionado>
      c10:	83 30       	cpi	r24, 0x03	; 3
      c12:	39 f4       	brne	.+14     	; 0xc22 <main+0x16a>
-     c14:	10 92 4e 01 	sts	0x014E, r1	; 0x80014e <cursorSelecionado>
-     c18:	d0 93 4d 01 	sts	0x014D, r29	; 0x80014d <changeDisplay+0x1>
-     c1c:	c0 93 4c 01 	sts	0x014C, r28	; 0x80014c <changeDisplay>
+     c14:	10 92 48 01 	sts	0x0148, r1	; 0x800148 <cursorSelecionado>
+     c18:	d0 93 47 01 	sts	0x0147, r29	; 0x800147 <changeDisplay+0x1>
+     c1c:	c0 93 46 01 	sts	0x0146, r28	; 0x800146 <changeDisplay>
      c20:	78 cf       	rjmp	.-272    	; 0xb12 <main+0x5a>
      c22:	8f 5f       	subi	r24, 0xFF	; 255
-     c24:	80 93 4e 01 	sts	0x014E, r24	; 0x80014e <cursorSelecionado>
+     c24:	80 93 48 01 	sts	0x0148, r24	; 0x800148 <cursorSelecionado>
      c28:	f7 cf       	rjmp	.-18     	; 0xc18 <main+0x160>
      c2a:	81 50       	subi	r24, 0x01	; 1
      c2c:	fb cf       	rjmp	.-10     	; 0xc24 <main+0x16c>
-     c2e:	80 91 4e 01 	lds	r24, 0x014E	; 0x80014e <cursorSelecionado>
+     c2e:	80 91 48 01 	lds	r24, 0x0148	; 0x800148 <cursorSelecionado>
      c32:	e0 91 00 01 	lds	r30, 0x0100	; 0x800100 <tentativa>
      c36:	f0 91 01 01 	lds	r31, 0x0101	; 0x800101 <tentativa+0x1>
      c3a:	e8 0f       	add	r30, r24
@@ -1441,12 +1441,12 @@ Disassembly of section .text:
      c4a:	99 0b       	sbc	r25, r25
      c4c:	20 33       	cpi	r18, 0x30	; 48
      c4e:	29 f4       	brne	.+10     	; 0xc5a <main+0x1a2>
-     c50:	10 93 52 01 	sts	0x0152, r17	; 0x800152 <n+0x1>
-     c54:	00 93 51 01 	sts	0x0151, r16	; 0x800151 <n>
+     c50:	10 93 4c 01 	sts	0x014C, r17	; 0x80014c <n+0x1>
+     c54:	00 93 4b 01 	sts	0x014B, r16	; 0x80014b <n>
      c58:	d4 cf       	rjmp	.-88     	; 0xc02 <main+0x14a>
      c5a:	c1 97       	sbiw	r24, 0x31	; 49
-     c5c:	90 93 52 01 	sts	0x0152, r25	; 0x800152 <n+0x1>
-     c60:	80 93 51 01 	sts	0x0151, r24	; 0x800151 <n>
+     c5c:	90 93 4c 01 	sts	0x014C, r25	; 0x80014c <n+0x1>
+     c60:	80 93 4b 01 	sts	0x014B, r24	; 0x80014b <n>
      c64:	ce cf       	rjmp	.-100    	; 0xc02 <main+0x14a>
 
 00000c66 <__divmodsi4>:
