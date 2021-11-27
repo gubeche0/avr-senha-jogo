@@ -30,7 +30,7 @@ int changeDisplay = 0;
 int8_t pos;
 char *tentativa = "0000";
 int16_t tempoTentativaAtual;
-int16_t tentativas = 0;
+int16_t tentativas;
 int n;
 
 ISR(TIMER1_OVF_vect){
@@ -51,10 +51,10 @@ int8_t readJoystick() {
     // print("  y: ");
     // printfloat(y);
 
-	if (x > 0.6) return RIGHT;
-	if (x < 0.4) return LEFT;
-	if (y > 0.5) return UP;
-	if (y < 0.4) return DOWN;
+	if (x > 0.65) return RIGHT;
+	if (x < 0.35) return LEFT;
+	if (y > 0.65) return UP;
+	if (y < 0.35) return DOWN;
 
 	return CENTER;
 }
@@ -65,7 +65,6 @@ void resetTempo() {
 
 void drawDisplay() {
 	hd44780_clear();
-	// hd44780_puts("Tempo: ");
 	hd44780_puts(("Tempo: "));
 	char time[2];
 	sprintf(time, "%d", tempoTentativaAtual); 
@@ -132,9 +131,12 @@ int16_t getRandomNumber() {
 
 void startGame() {
 	password = getRandomNumber();
-	tentativas = 0;
+	tentativas = 1;
 	cursorSelecionado = 0;
-	tentativa = "0000";
+	tentativa[0] = '0';
+	tentativa[1] = '0';
+	tentativa[2] = '0';
+	tentativa[3] = '0';
 	LCD_RESP_PORT = 0x00;
 
 	print("password: ");
@@ -239,7 +241,7 @@ int main() {
 				pos = readJoystick();
 				if (pos != CENTER) {
 					while (readJoystick() != CENTER) {
-						pos = readJoystick();
+						// pos = readJoystick();
 						_delay_ms(1);
 					}
 
